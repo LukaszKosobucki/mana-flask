@@ -35,4 +35,4 @@ USER appuser
 COPY . /code
 EXPOSE 8000
 
-CMD ["python", "flaskr"]
+CMD ["python", "wsgi.py"]
