@@ -35,4 +35,6 @@ USER appuser
 COPY . /code
 EXPOSE 8000
 
-CMD ["python", "wsgi.py"]
+CMD ["bash", "run.sh"]
+# RUN ["python", "postgres/create_db.py"]
+# CMD ["python", "wsgi.py"]

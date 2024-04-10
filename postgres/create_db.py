@@ -33,4 +33,8 @@ def create_table():
     print("works")
 
 
-create_table()
+if __name__ == "__main__":
+    print(
+        "???"
+    )
+    create_table()
