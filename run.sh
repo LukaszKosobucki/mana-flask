@@ -1,4 +1,4 @@
 #!/bin/bash
 
-exec python postgres/create_db.py &
-exec python wsgi.py
+exec poetry run python postgres/create_db.py &
+exec poetry run python wsgi.py
