@@ -17,7 +17,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=test
+      - POSTGRES_DB=students
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     networks:
       - backend
