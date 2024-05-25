@@ -1,13 +1,14 @@
 from flask import Flask, jsonify
 from flaskr.extensions import db
 from flaskr.models.student import Student
+from flaskr.models.degree import Degree
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
 
     # change string to the name of your database; add path if necessary
-    db_name = "postgres:db-123456@db:5432/students"
+    db_name = "postgres:db-123456@db:5432/university"
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://' + db_name
 
@@ -38,18 +39,22 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
     #this works like restapi almost
-    @app.route('/test')
-    def test():
+    @app.get('/api/v1/students')
+    def students():
         try:
-            # students = db.session.query(Students).all()
             students = Student.query.all()
             return jsonify(students)
         except Exception as e:
-        # e holds description of the error
-            error_text = "<p>The error:<br>" + str(e) + "</p>"
-            hed = '<h1>Something is broken.</h1>'
-            return hed + error_text
+            return {"error": str(e)}
+        
+    @app.get('/api/v1/degrees')
+    def degrees():
+        try:
+            degrees = Degree.query.all()
+            return jsonify(degrees)
+        except Exception as e:
+            return {"error": str(e)}
+        
     
-
 
     return app

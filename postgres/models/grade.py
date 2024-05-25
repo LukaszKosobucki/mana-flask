@@ -4,10 +4,11 @@ from sqlalchemy.orm import mapped_column
 from postgres.models.base import Base
 
 
-class Student(Base): 
-    __tablename__ = 'students'
+class Grade(Base): 
+    __tablename__ = 'grades'
     id: Mapped[int] = mapped_column(Integer, primary_key=True) 
-    name: Mapped[str] 
-    lastname: Mapped[str] 
-    semester: Mapped[int]
-    field_id: Mapped[int] = mapped_column(ForeignKey("fields.id"))
+    grade: Mapped[int] 
+    student_id: Mapped[int] = mapped_column(ForeignKey("students.id")) 
+    subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id")) 
+
+    
