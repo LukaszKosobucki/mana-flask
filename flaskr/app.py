@@ -1,7 +1,11 @@
 from flask import Flask, jsonify
 from flaskr.extensions import db
-from flaskr.models.student import Student
-from flaskr.models.degree import Degree
+from postgres.models.student import Student
+from postgres.models.degree import Degree
+from postgres.models.field import Field
+from flaskr.helpers.student import StudentsHelper
+from flaskr.helpers.degree import DegreesHelper
+from flaskr.helpers.field import FieldsHelper
 
 def create_app(test_config=None):
     # create and configure the app
@@ -42,16 +46,27 @@ def create_app(test_config=None):
     @app.get('/api/v1/students')
     def students():
         try:
-            students = Student.query.all()
-            return jsonify(students)
+            students = db.session.query(Student)
+            result = StudentsHelper(students).jsonify()
+            return result
         except Exception as e:
             return {"error": str(e)}
         
     @app.get('/api/v1/degrees')
     def degrees():
         try:
-            degrees = Degree.query.all()
-            return jsonify(degrees)
+            degrees = db.session.query(Degree)
+            result = DegreesHelper(degrees).jsonify()
+            return result
+        except Exception as e:
+            return {"error": str(e)}
+        
+    @app.get('/api/v1/fields')
+    def fields():
+        try:
+            fields = db.session.query(Field)
+            result = FieldsHelper(fields).jsonify()
+            return result
         except Exception as e:
             return {"error": str(e)}
         

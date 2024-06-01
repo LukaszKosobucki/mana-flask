@@ -32,20 +32,33 @@ def create_table():
             {'name': 'Bachelor'},
             {'name': 'Engineer'},
             {'name': 'Master'},
-            {'name': 'PhD'},
+            {'name': 'Doctorate'},
         ]
         session.bulk_insert_mappings(Degree, degrees)
         session.commit()
-    # students_len = session.query(Student).all()
-    # if len(students_len) == 0:
-    #     students = [
-    #         {'name': 'Rajiv', 'lastname': 'Khanna', 'semester': 1},
-    #         {'name': 'Komal', 'lastname': 'Bhandari', 'semester': 1},
-    #         {'name': 'Abdul', 'lastname': 'Sattar', 'semester': 1},
-    #         {'name': 'Priya', 'lastname': 'Rajhans', 'semester': 1},
-    #     ]
-    #     session.bulk_insert_mappings(Student, students)
-    #     session.commit()
+
+    fields_len = session.query(Field).all()
+    if len(fields_len) == 0:
+        fields = [
+            {'name': 'Enterpreneurship', "degree_id": 1},
+            {'name': 'Management', "degree_id": 1},
+            {'name': 'Computer Science', "degree_id": 2},
+            {'name': 'Mechanics and Termodynamics', "degree_id": 2},
+        ]
+        session.bulk_insert_mappings(Field, fields)
+        session.commit()
+
+
+    students_len = session.query(Student).all()
+    if len(students_len) == 0:
+        students = [
+            {'name': 'Rajiv', 'lastname': 'Khanna', 'semester': 1, 'field_id': 1},
+            {'name': 'Komal', 'lastname': 'Bhandari', 'semester': 5, 'field_id': 2},
+            {'name': 'Abdul', 'lastname': 'Sattar', 'semester': 1, 'field_id': 3},
+            {'name': 'Priya', 'lastname': 'Rajhans', 'semester': 2, 'field_id': 4},
+        ]
+        session.bulk_insert_mappings(Student, students)
+        session.commit()
 
     session.close()
     

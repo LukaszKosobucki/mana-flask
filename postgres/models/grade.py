@@ -6,9 +6,9 @@ from postgres.models.base import Base
 
 class Grade(Base): 
     __tablename__ = 'grades'
-    id: Mapped[int] = mapped_column(Integer, primary_key=True) 
-    grade: Mapped[int] 
-    student_id: Mapped[int] = mapped_column(ForeignKey("students.id")) 
-    subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id")) 
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, nullable=False) 
+    grade: Mapped[int] = mapped_column(Integer, nullable=False)
+    student_id: Mapped[int] = mapped_column(Integer, ForeignKey("students.id"), nullable=False) 
+    subject_id: Mapped[int] = mapped_column(Integer, ForeignKey("subjects.id"), nullable=False) 
 
     
