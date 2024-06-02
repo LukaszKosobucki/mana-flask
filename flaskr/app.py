@@ -3,9 +3,13 @@ from flaskr.extensions import db
 from postgres.models.student import Student
 from postgres.models.degree import Degree
 from postgres.models.field import Field
+from postgres.models.grade import Grade
+from postgres.models.subject import Subject
 from flaskr.helpers.student import StudentsHelper
 from flaskr.helpers.degree import DegreesHelper
 from flaskr.helpers.field import FieldsHelper
+from flaskr.helpers.grade import GradesHelper
+from flaskr.helpers.subject import SubjectsHelper
 
 def create_app(test_config=None):
     # create and configure the app
@@ -70,6 +74,22 @@ def create_app(test_config=None):
         except Exception as e:
             return {"error": str(e)}
         
-    
+    @app.get('/api/v1/grades')
+    def grades():
+        try:
+            grades = db.session.query(Grade)
+            result = GradesHelper(grades).jsonify()
+            return result
+        except Exception as e:
+            return {"error": str(e)}
+        
+    @app.get('/api/v1/subjects')
+    def subjects():
+        try:
+            subjects = db.session.query(Subject)
+            result = SubjectsHelper(subjects).jsonify()
+            return result
+        except Exception as e:
+            return {"error": str(e)}
 
     return app

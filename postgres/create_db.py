@@ -60,6 +60,28 @@ def create_table():
         session.bulk_insert_mappings(Student, students)
         session.commit()
 
+    subjects_len = session.query(Subject).all()
+    if len(subjects_len) == 0:
+        subjects = [
+            {'name': 'Enterpreneurship in Company', 'field_id': 1},
+            {'name': 'Management in Company', 'field_id': 2},
+            {'name': 'Algorithms', 'field_id': 3},
+            {'name': 'Termodynamics', 'field_id': 4},
+        ]
+        session.bulk_insert_mappings(Subject, subjects)
+        session.commit()
+
+    grades_len = session.query(Grade).all()
+    if len(grades_len) == 0:
+        grades = [
+            {'grade': '2', 'student_id': 1, 'subject_id': 1},
+            {'grade': '3', 'student_id': 2, 'subject_id': 2},
+            {'grade': '4', 'student_id': 3, 'subject_id': 3},
+            {'grade': '5', 'student_id': 4, 'subject_id': 4},
+        ]
+        session.bulk_insert_mappings(Grade, grades)
+        session.commit()
+
     session.close()
     
 
